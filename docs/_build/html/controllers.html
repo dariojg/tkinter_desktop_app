@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>controllers package &mdash; documentación de Expense Manager - 1.0.0</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=36c4ab74"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=efdbd0b9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="models module" href="models.html" />
+    <link rel="prev" title="Administrador de gastos" href="main.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Expense Manager
+          </a>
+              <div class="version">
+                1.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="main.html">Administrador de gastos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#referencia-rapida">Referencia rápida</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#categorias">Categorías</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#gastos">Gastos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#ejemplo">Ejemplo</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">controllers package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-controllers.c_categoria">controllers.c_categoria module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#controllers.c_categoria.CategoriaController"><code class="docutils literal notranslate"><span class="pre">CategoriaController</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#controllers.c_categoria.CategoriaController.crear"><code class="docutils literal notranslate"><span class="pre">CategoriaController.crear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controllers.c_categoria.CategoriaController.editar"><code class="docutils literal notranslate"><span class="pre">CategoriaController.editar()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controllers.c_categoria.CategoriaController.eliminar"><code class="docutils literal notranslate"><span class="pre">CategoriaController.eliminar()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controllers.c_categoria.CategoriaController.eliminar_categoria_gastos_asociados"><code class="docutils literal notranslate"><span class="pre">CategoriaController.eliminar_categoria_gastos_asociados()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controllers.c_categoria.CategoriaController.set_tree_gastos"><code class="docutils literal notranslate"><span class="pre">CategoriaController.set_tree_gastos()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-controllers.c_gasto">controllers.c_gasto module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#controllers.c_gasto.GastoController"><code class="docutils literal notranslate"><span class="pre">GastoController</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#controllers.c_gasto.GastoController.buscar_gastos"><code class="docutils literal notranslate"><span class="pre">GastoController.buscar_gastos()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controllers.c_gasto.GastoController.buscar_gastos_por_cat"><code class="docutils literal notranslate"><span class="pre">GastoController.buscar_gastos_por_cat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controllers.c_gasto.GastoController.crear"><code class="docutils literal notranslate"><span class="pre">GastoController.crear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controllers.c_gasto.GastoController.editar"><code class="docutils literal notranslate"><span class="pre">GastoController.editar()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controllers.c_gasto.GastoController.eliminar"><code class="docutils literal notranslate"><span class="pre">GastoController.eliminar()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controllers.c_gasto.GastoController.inputs_gasto_is_ok"><code class="docutils literal notranslate"><span class="pre">GastoController.inputs_gasto_is_ok()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-controllers">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">models module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">utils module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">views package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Expense Manager</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">controllers package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/controllers.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="controllers-package">
+<h1>controllers package<a class="headerlink" href="#controllers-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-controllers.c_categoria">
+<span id="controllers-c-categoria-module"></span><h2>controllers.c_categoria module<a class="headerlink" href="#module-controllers.c_categoria" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="controllers.c_categoria.CategoriaController">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">controllers.c_categoria.</span></span><span class="sig-name descname"><span class="pre">CategoriaController</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/controllers/c_categoria.html#CategoriaController"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controllers.c_categoria.CategoriaController" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Controlador para gestionar categorías en una aplicación.</p>
+<p>Este controlador proporciona métodos para crear, eliminar y editar categorías, así como para gestionar
+los gastos asociados a ellas.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>app (Tk): La instancia de la aplicación tkinter a la que está asociado el controlador.</p>
+</dd>
+<dt>Attributes:</dt><dd><p>app (Tk): La instancia de la aplicación tkinter.
+tree_gastos (Treeview): El widget Treeview utilizado para mostrar la lista de gastos asociados a las categorías.</p>
+</dd>
+<dt>Methods:</dt><dd><p>crear(var_categoria, t_categoria): Crea una nueva categoría y la agrega a la lista de categorías en la interfaz.
+eliminar(item_focus, t_categoria): Elimina una categoría seleccionada y todos los gastos asociados a ella.
+editar(var_categoria, t_categoria): Edita el nombre de una categoría seleccionada.
+set_tree_gastos(t_gastos): Establece el widget Treeview utilizado para mostrar los gastos asociados a las categorías.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.c_categoria.CategoriaController.crear">
+<span class="sig-name descname"><span class="pre">crear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_categoria</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_categoria</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/controllers/c_categoria.html#CategoriaController.crear"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controllers.c_categoria.CategoriaController.crear" title="Link to this definition"></a></dt>
+<dd><p>Crea una nueva categoría y la agrega a la lista de categorías en la interfaz.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>var_categoria (StringVar): Variable de control para el campo de entrada de categoría.
+t_categoria (Treeview): Widget Treeview que muestra la lista de categorías.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.c_categoria.CategoriaController.editar">
+<span class="sig-name descname"><span class="pre">editar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_categoria</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_categoria</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/controllers/c_categoria.html#CategoriaController.editar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controllers.c_categoria.CategoriaController.editar" title="Link to this definition"></a></dt>
+<dd><p>Edita el nombre de una categoría seleccionada.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>var_categoria (StringVar): Variable de control para el campo de entrada de categoría.
+t_categoria (Treeview): Widget Treeview que muestra la lista de categorías.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.c_categoria.CategoriaController.eliminar">
+<span class="sig-name descname"><span class="pre">eliminar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_categoria</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/controllers/c_categoria.html#CategoriaController.eliminar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controllers.c_categoria.CategoriaController.eliminar" title="Link to this definition"></a></dt>
+<dd><p>Elimina una categoría seleccionada y todos los gastos asociados a ella.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>item_focus: El ítem seleccionado en el widget Treeview.
+t_categoria (Treeview): Widget Treeview que muestra la lista de categorías.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.c_categoria.CategoriaController.eliminar_categoria_gastos_asociados">
+<span class="sig-name descname"><span class="pre">eliminar_categoria_gastos_asociados</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gastos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/controllers/c_categoria.html#CategoriaController.eliminar_categoria_gastos_asociados"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controllers.c_categoria.CategoriaController.eliminar_categoria_gastos_asociados" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.c_categoria.CategoriaController.set_tree_gastos">
+<span class="sig-name descname"><span class="pre">set_tree_gastos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_gastos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/controllers/c_categoria.html#CategoriaController.set_tree_gastos"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controllers.c_categoria.CategoriaController.set_tree_gastos" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-controllers.c_gasto">
+<span id="controllers-c-gasto-module"></span><h2>controllers.c_gasto module<a class="headerlink" href="#module-controllers.c_gasto" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="controllers.c_gasto.GastoController">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">controllers.c_gasto.</span></span><span class="sig-name descname"><span class="pre">GastoController</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_categoria</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/controllers/c_gasto.html#GastoController"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controllers.c_gasto.GastoController" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Controlador para gestionar gastos de la aplicación.</p>
+<p>Este controlador proporciona métodos para crear, eliminar, editar y buscar gastos, así como para vincularlos a categorías.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>app (Tk): La instancia de la aplicación tkinter a la que está asociado el controlador.
+view_categoria (TreeView): El widget Treeview utilizado para mostrar las categorías.</p>
+</dd>
+<dt>Attributes:</dt><dd><p>app (Tk): La instancia de la aplicación tkinter.
+view_cat (TreeView): El widget Treeview que muestra las categorías.</p>
+</dd>
+<dt>Methods:</dt><dd><p>inputs_gasto_is_ok(var_gasto, var_monto): Verifica si los valores de entrada para gasto y monto son válidos.
+crear(var_gasto, var_monto, tree_gastos): Crea un nuevo gasto y lo agrega a la lista de gastos en la interfaz.
+eliminar(tree_gastos): Elimina un gasto seleccionado.
+editar(var_gasto, var_monto, tree_gastos): Edita un gasto seleccionado.
+buscar_gastos(var_filtro, tree_gastos): Busca gastos por nombre.
+buscar_gastos_por_cat(var_filtro_cat, tree_gastos): Busca gastos por categoría.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.c_gasto.GastoController.buscar_gastos">
+<span class="sig-name descname"><span class="pre">buscar_gastos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_filtro</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_gastos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/controllers/c_gasto.html#GastoController.buscar_gastos"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controllers.c_gasto.GastoController.buscar_gastos" title="Link to this definition"></a></dt>
+<dd><p>Busca gastos por nombre.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>var_filtro (StringVar): Variable de control para el campo de búsqueda.
+tree_gastos (Treeview): Widget Treeview que muestra la lista de gastos.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.c_gasto.GastoController.buscar_gastos_por_cat">
+<span class="sig-name descname"><span class="pre">buscar_gastos_por_cat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_filtro_cat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_gastos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/controllers/c_gasto.html#GastoController.buscar_gastos_por_cat"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controllers.c_gasto.GastoController.buscar_gastos_por_cat" title="Link to this definition"></a></dt>
+<dd><p>Busca gastos por categoría.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>var_filtro_cat (StringVar): Variable de control para el campo de búsqueda por categoría.
+tree_gastos (Treeview): Widget Treeview que muestra la lista de gastos.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.c_gasto.GastoController.crear">
+<span class="sig-name descname"><span class="pre">crear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_gasto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_monto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_gastos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/controllers/c_gasto.html#GastoController.crear"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controllers.c_gasto.GastoController.crear" title="Link to this definition"></a></dt>
+<dd><p>Crea un nuevo gasto y lo agrega a la lista de gastos en la interfaz.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>var_gasto (StringVar): Variable de control para el campo de entrada de gasto.
+var_monto (StringVar): Variable de control para el campo de entrada de monto.
+tree_gastos (Treeview): Widget Treeview que muestra la lista de gastos.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.c_gasto.GastoController.editar">
+<span class="sig-name descname"><span class="pre">editar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_gasto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_monto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_gastos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/controllers/c_gasto.html#GastoController.editar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controllers.c_gasto.GastoController.editar" title="Link to this definition"></a></dt>
+<dd><p>Edita un gasto seleccionado.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>var_gasto (StringVar): Variable de control para el campo de entrada de gasto.
+var_monto (StringVar): Variable de control para el campo de entrada de monto.
+tree_gastos (Treeview): Widget Treeview que muestra la lista de gastos.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.c_gasto.GastoController.eliminar">
+<span class="sig-name descname"><span class="pre">eliminar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree_gastos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/controllers/c_gasto.html#GastoController.eliminar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controllers.c_gasto.GastoController.eliminar" title="Link to this definition"></a></dt>
+<dd><p>Elimina un gasto seleccionado.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>tree_gastos (Treeview): Widget Treeview que muestra la lista de gastos.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.c_gasto.GastoController.inputs_gasto_is_ok">
+<span class="sig-name descname"><span class="pre">inputs_gasto_is_ok</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_gasto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_monto</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/controllers/c_gasto.html#GastoController.inputs_gasto_is_ok"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#controllers.c_gasto.GastoController.inputs_gasto_is_ok" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-controllers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-controllers" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="main.html" class="btn btn-neutral float-left" title="Administrador de gastos" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="models.html" class="btn btn-neutral float-right" title="models module" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2023, Dario J. Grinberg.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+# Directorios generados por Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Directorios generados por Visual Studio Code
+.vscode/
+.vscodeignore
+
+# Directorio de entorno virtual (opcional, si usas entornos virtuales)
+venv/
+env/
+__env__/
+ENV/
+
+# Archivos de registro y caché
+*.log
+*.sqlite3
+
+# Archivos generados por linters, formateadores, y herramientas similares
+*.pylint
+*.pyc
+
+# Archivos generados por IDEs u otros editores
+.idea/
+*.swp
+*.swo
+
+# Archivo de configuración de usuario de Visual Studio Code
+.settings.json
+
+# Carpeta de caché de Jupyter Notebook
+.ipynb_checkpoints/
+
+# Carpetas generadas por pytest
+__pycache__/
+.pytest_cache/
+
+# Carpeta generada por pycache
+__pycache__/
+
+# Carpeta generada por pipenv
+.Python
+

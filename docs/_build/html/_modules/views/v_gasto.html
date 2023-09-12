@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>views.v_gasto &#8212; documentación de Expense Manager - 1.0.0</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=039e1c02" />
+    <script src="../../_static/documentation_options.js?v=36c4ab74"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/translations.js?v=efdbd0b9"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Código fuente para views.v_gasto</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">ttk</span><span class="p">,</span> <span class="n">Button</span><span class="p">,</span> <span class="n">StringVar</span><span class="p">,</span> <span class="n">DoubleVar</span><span class="p">,</span> <span class="n">Label</span><span class="p">,</span> <span class="n">Entry</span>
+<span class="kn">from</span> <span class="nn">models</span> <span class="kn">import</span> <span class="n">Gasto</span>
+
+<span class="c1">#############################</span>
+<span class="c1"># #     View Gastos       # #</span>
+<span class="c1">#############################</span>
+
+<span class="n">PAD_X</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">PAD_Y</span> <span class="o">=</span> <span class="mi">5</span>
+
+
+<div class="viewcode-block" id="GastoView">
+<a class="viewcode-back" href="../../views.html#views.v_gasto.GastoView">[documentos]</a>
+<span class="k">class</span> <span class="nc">GastoView</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">contr_gasto</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_gasto</span> <span class="o">=</span> <span class="n">StringVar</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_monto</span> <span class="o">=</span> <span class="n">DoubleVar</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_filtro</span> <span class="o">=</span> <span class="n">StringVar</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_filtro_cat</span> <span class="o">=</span> <span class="n">StringVar</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c_gasto</span> <span class="o">=</span> <span class="n">contr_gasto</span>
+
+<div class="viewcode-block" id="GastoView.view">
+<a class="viewcode-back" href="../../views.html#views.v_gasto.GastoView.view">[documentos]</a>
+    <span class="k">def</span> <span class="nf">view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree_gastos</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree_gastos</span><span class="p">[</span><span class="s2">&quot;columns&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;col1&quot;</span><span class="p">,</span> <span class="s2">&quot;col2&quot;</span><span class="p">,</span> <span class="s2">&quot;col3&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree_gastos</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="s2">&quot;#0&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Id&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree_gastos</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;#0&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree_gastos</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="s2">&quot;col1&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Gastos&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree_gastos</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;col1&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">minwidth</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree_gastos</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="s2">&quot;col2&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Monto&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree_gastos</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;col2&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span> <span class="n">minwidth</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree_gastos</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="s2">&quot;col3&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Fecha&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree_gastos</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;col3&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">minwidth</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree_gastos</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">PAD_X</span><span class="p">)</span>
+
+        <span class="n">b_guardar</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">controller_crear_gasto</span><span class="p">)</span>
+        <span class="n">b_guardar</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nw&quot;</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">PAD_X</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="n">PAD_Y</span><span class="p">)</span>
+        <span class="n">b_eliminar</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;+/-&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">controller_editar_gasto</span><span class="p">)</span>
+        <span class="n">b_eliminar</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;n&quot;</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="n">PAD_Y</span><span class="p">)</span>
+        <span class="n">b_eliminar</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">controller_eliminar_gasto</span><span class="p">)</span>
+        <span class="n">b_eliminar</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;ne&quot;</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">PAD_X</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="n">PAD_Y</span><span class="p">)</span>
+
+        <span class="n">l_gasto</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;gasto&quot;</span><span class="p">)</span>
+        <span class="n">l_gasto</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">PAD_X</span><span class="p">)</span>
+        <span class="n">e_gasto</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">var_gasto</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">e_gasto</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;n&quot;</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">PAD_X</span><span class="p">)</span>
+
+        <span class="n">l_monto</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;monto&quot;</span><span class="p">)</span>
+        <span class="n">l_monto</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">PAD_X</span><span class="p">)</span>
+        <span class="n">l_monto</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">var_monto</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">l_monto</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;n&quot;</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">PAD_X</span><span class="p">)</span>
+
+        <span class="n">l_buscar</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Buscar gastos&quot;</span><span class="p">)</span>
+        <span class="n">l_buscar</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">PAD_X</span><span class="p">)</span>
+        <span class="n">e_filtro</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">var_filtro</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">e_filtro</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;n&quot;</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">PAD_X</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">b_buscar</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;Buscar&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">controller_buscar_gastos</span><span class="p">)</span>
+        <span class="n">b_buscar</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;e&quot;</span><span class="p">,</span>  <span class="n">padx</span><span class="o">=</span><span class="n">PAD_X</span><span class="p">)</span>
+
+        <span class="n">l_fcat</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Filtrar categoría&quot;</span><span class="p">)</span>
+        <span class="n">l_fcat</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">PAD_X</span><span class="p">)</span>
+        <span class="n">e_fcat</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">var_filtro_cat</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">e_fcat</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;n&quot;</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">PAD_X</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">b_fcat</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;Buscar&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">controller_buscar_gastos_por_cat</span><span class="p">)</span>
+        <span class="n">b_fcat</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;e&quot;</span><span class="p">,</span>  <span class="n">padx</span><span class="o">=</span><span class="n">PAD_X</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_gastos</span></div>
+
+
+<div class="viewcode-block" id="GastoView.controller_crear_gasto">
+<a class="viewcode-back" href="../../views.html#views.v_gasto.GastoView.controller_crear_gasto">[documentos]</a>
+    <span class="k">def</span> <span class="nf">controller_crear_gasto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c_gasto</span><span class="o">.</span><span class="n">crear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var_gasto</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var_monto</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_gastos</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GastoView.controller_editar_gasto">
+<a class="viewcode-back" href="../../views.html#views.v_gasto.GastoView.controller_editar_gasto">[documentos]</a>
+    <span class="k">def</span> <span class="nf">controller_editar_gasto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c_gasto</span><span class="o">.</span><span class="n">editar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var_gasto</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var_monto</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_gastos</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GastoView.controller_eliminar_gasto">
+<a class="viewcode-back" href="../../views.html#views.v_gasto.GastoView.controller_eliminar_gasto">[documentos]</a>
+    <span class="k">def</span> <span class="nf">controller_eliminar_gasto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c_gasto</span><span class="o">.</span><span class="n">eliminar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree_gastos</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GastoView.controller_buscar_gastos">
+<a class="viewcode-back" href="../../views.html#views.v_gasto.GastoView.controller_buscar_gastos">[documentos]</a>
+    <span class="k">def</span> <span class="nf">controller_buscar_gastos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c_gasto</span><span class="o">.</span><span class="n">buscar_gastos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var_filtro</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_gastos</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GastoView.controller_buscar_gastos_por_cat">
+<a class="viewcode-back" href="../../views.html#views.v_gasto.GastoView.controller_buscar_gastos_por_cat">[documentos]</a>
+    <span class="k">def</span> <span class="nf">controller_buscar_gastos_por_cat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c_gasto</span><span class="o">.</span><span class="n">buscar_gastos_por_cat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var_filtro_cat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_gastos</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GastoView.get_tree">
+<a class="viewcode-back" href="../../views.html#views.v_gasto.GastoView.get_tree">[documentos]</a>
+    <span class="k">def</span> <span class="nf">get_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_gastos</span></div>
+
+
+<div class="viewcode-block" id="GastoView.update_treeview">
+<a class="viewcode-back" href="../../views.html#views.v_gasto.GastoView.update_treeview">[documentos]</a>
+    <span class="k">def</span> <span class="nf">update_treeview</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">gastos</span> <span class="o">=</span> <span class="n">Gasto</span><span class="p">()</span><span class="o">.</span><span class="n">select</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">gastos</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tree_gastos</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">values</span><span class="o">=</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">amount</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">get_formated_date</span><span class="p">()))</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Expense Manager</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">controllers package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">models module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">utils module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views.html">views package</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Código de módulo</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Dario J. Grinberg.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

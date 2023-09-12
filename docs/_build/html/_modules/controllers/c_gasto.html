@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>controllers.c_gasto &mdash; documentación de Expense Manager - 1.0.0</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=36c4ab74"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=efdbd0b9"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Expense Manager
+          </a>
+              <div class="version">
+                1.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">Administrador de gastos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html#referencia-rapida">Referencia rápida</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html#categorias">Categorías</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html#gastos">Gastos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html#ejemplo">Ejemplo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">controllers package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">models module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">utils module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views.html">views package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Expense Manager</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Código de módulo</a></li>
+      <li class="breadcrumb-item active">controllers.c_gasto</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fuente para controllers.c_gasto</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="kn">from</span> <span class="nn">tkinter.messagebox</span> <span class="kn">import</span> <span class="n">showerror</span><span class="p">,</span> <span class="n">showinfo</span><span class="p">,</span> <span class="n">askyesno</span>
+<span class="kn">from</span> <span class="nn">models</span> <span class="kn">import</span> <span class="n">Gasto</span><span class="p">,</span> <span class="n">Categoria</span>
+<span class="kn">from</span> <span class="nn">peewee</span> <span class="kn">import</span> <span class="n">DoesNotExist</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Controlador de la vista gastos</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="GastoController">
+<a class="viewcode-back" href="../../controllers.html#controllers.c_gasto.GastoController">[documentos]</a>
+<span class="k">class</span> <span class="nc">GastoController</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Controlador para gestionar gastos de la aplicación.</span>
+
+<span class="sd">    Este controlador proporciona métodos para crear, eliminar, editar y buscar gastos, así como para vincularlos a categorías.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        app (Tk): La instancia de la aplicación tkinter a la que está asociado el controlador.</span>
+<span class="sd">        view_categoria (TreeView): El widget Treeview utilizado para mostrar las categorías.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        app (Tk): La instancia de la aplicación tkinter.</span>
+<span class="sd">        view_cat (TreeView): El widget Treeview que muestra las categorías.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        inputs_gasto_is_ok(var_gasto, var_monto): Verifica si los valores de entrada para gasto y monto son válidos.</span>
+<span class="sd">        crear(var_gasto, var_monto, tree_gastos): Crea un nuevo gasto y lo agrega a la lista de gastos en la interfaz.</span>
+<span class="sd">        eliminar(tree_gastos): Elimina un gasto seleccionado.</span>
+<span class="sd">        editar(var_gasto, var_monto, tree_gastos): Edita un gasto seleccionado.</span>
+<span class="sd">        buscar_gastos(var_filtro, tree_gastos): Busca gastos por nombre.</span>
+<span class="sd">        buscar_gastos_por_cat(var_filtro_cat, tree_gastos): Busca gastos por categoría.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">view_categoria</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view_cat</span> <span class="o">=</span> <span class="n">view_categoria</span>
+
+<div class="viewcode-block" id="GastoController.inputs_gasto_is_ok">
+<a class="viewcode-back" href="../../controllers.html#controllers.c_gasto.GastoController.inputs_gasto_is_ok">[documentos]</a>
+    <span class="k">def</span> <span class="nf">inputs_gasto_is_ok</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_gasto</span><span class="p">,</span> <span class="n">var_monto</span><span class="p">):</span>
+        <span class="n">gasto</span> <span class="o">=</span> <span class="n">var_gasto</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">monto</span> <span class="o">=</span> <span class="n">var_monto</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">gasto</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="ow">and</span> <span class="n">gasto</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">monto</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="ow">and</span> <span class="n">monto</span> <span class="o">!=</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="GastoController.crear">
+<a class="viewcode-back" href="../../controllers.html#controllers.c_gasto.GastoController.crear">[documentos]</a>
+    <span class="k">def</span> <span class="nf">crear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_gasto</span><span class="p">,</span> <span class="n">var_monto</span><span class="p">,</span> <span class="n">tree_gastos</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Crea un nuevo gasto y lo agrega a la lista de gastos en la interfaz.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            var_gasto (StringVar): Variable de control para el campo de entrada de gasto.</span>
+<span class="sd">            var_monto (StringVar): Variable de control para el campo de entrada de monto.</span>
+<span class="sd">            tree_gastos (Treeview): Widget Treeview que muestra la lista de gastos.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tree_categorias</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view_cat</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">gasto</span> <span class="o">=</span> <span class="n">var_gasto</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="n">monto</span> <span class="o">=</span> <span class="n">var_monto</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+            <span class="n">showerror</span><span class="p">(</span><span class="s2">&quot;Error&quot;</span><span class="p">,</span> <span class="s2">&quot;Hubo un problema con el monto o el nombre, verifica que los datos son correctos&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">ex</span>
+
+        <span class="n">item_categoria_focus</span> <span class="o">=</span> <span class="n">tree_categorias</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">item_categoria_focus</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">item_categoria_focus</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">showerror</span><span class="p">(</span><span class="s2">&quot;Error&quot;</span><span class="p">,</span> <span class="s2">&quot;El gasto debe pertenecer a una categoría, selecciona una categoría&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">item_categoria_id</span> <span class="o">=</span> <span class="n">tree_categorias</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">item_categoria_focus</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+        <span class="n">selected_categoria</span> <span class="o">=</span> <span class="n">Categoria</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Categoria</span><span class="o">.</span><span class="n">id</span><span class="o">==</span><span class="n">item_categoria_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs_gasto_is_ok</span><span class="p">(</span><span class="n">var_gasto</span><span class="p">,</span> <span class="n">var_monto</span><span class="p">):</span>
+            <span class="n">showerror</span><span class="p">(</span><span class="s2">&quot;Error&quot;</span><span class="p">,</span> <span class="s2">&quot;Debes ingresar el gasto y el monto para crear&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="n">askyesno</span><span class="p">(</span><span class="s2">&quot;Guardar&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Vas a crear un gasto </span><span class="si">{</span><span class="n">gasto</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, monto </span><span class="si">{</span><span class="n">monto</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">):</span>
+            <span class="n">m_gasto</span> <span class="o">=</span> <span class="n">Gasto</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">gasto</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="n">monto</span><span class="p">,</span> <span class="n">categoria</span><span class="o">=</span><span class="n">selected_categoria</span><span class="p">)</span>
+            <span class="n">m_gasto</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>  <span class="c1"># self.m_gasto.model_insert_gasto(gasto, monto, date, item_categoria_id)</span>
+            <span class="n">tree_gastos</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">m_gasto</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">values</span><span class="o">=</span><span class="p">(</span><span class="n">gasto</span><span class="p">,</span> <span class="n">monto</span><span class="p">,</span> <span class="n">m_gasto</span><span class="o">.</span><span class="n">get_formated_date</span><span class="p">()))</span>
+            <span class="n">showinfo</span><span class="p">(</span><span class="s2">&quot;Guardado&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Gasto </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">gasto</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> creado exitosamente&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GastoController.eliminar">
+<a class="viewcode-back" href="../../controllers.html#controllers.c_gasto.GastoController.eliminar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">eliminar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_gastos</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Elimina un gasto seleccionado.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tree_gastos (Treeview): Widget Treeview que muestra la lista de gastos.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">item_focus</span> <span class="o">=</span> <span class="n">tree_gastos</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+        <span class="n">gasto_id</span> <span class="o">=</span> <span class="n">tree_gastos</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">item_focus</span><span class="p">)[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
+        <span class="n">tree_gastos</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">item_focus</span><span class="p">)</span>
+        <span class="n">m_gasto</span> <span class="o">=</span> <span class="n">Gasto</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Gasto</span><span class="o">.</span><span class="n">id</span><span class="o">==</span><span class="n">gasto_id</span><span class="p">)</span>
+        <span class="n">m_gasto</span><span class="o">.</span><span class="n">delete_instance</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ELIMINASTE GASTO id </span><span class="si">{</span><span class="n">gasto_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GastoController.editar">
+<a class="viewcode-back" href="../../controllers.html#controllers.c_gasto.GastoController.editar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">editar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_gasto</span><span class="p">,</span> <span class="n">var_monto</span><span class="p">,</span> <span class="n">tree_gastos</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Edita un gasto seleccionado.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            var_gasto (StringVar): Variable de control para el campo de entrada de gasto.</span>
+<span class="sd">            var_monto (StringVar): Variable de control para el campo de entrada de monto.</span>
+<span class="sd">            tree_gastos (Treeview): Widget Treeview que muestra la lista de gastos.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">item_gastos_focus</span> <span class="o">=</span> <span class="n">tree_gastos</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">item_gastos_focus</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">item_gastos_focus</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">gasto</span> <span class="o">=</span> <span class="n">var_gasto</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">monto</span> <span class="o">=</span> <span class="n">var_monto</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">date_str</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">-%m-%Y&quot;</span><span class="p">)</span>
+
+        <span class="n">gasto_id</span> <span class="o">=</span> <span class="n">tree_gastos</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">item_gastos_focus</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs_gasto_is_ok</span><span class="p">(</span><span class="n">var_gasto</span><span class="p">,</span> <span class="n">var_monto</span><span class="p">):</span>
+            <span class="n">showerror</span><span class="p">(</span><span class="s2">&quot;Error&quot;</span><span class="p">,</span> <span class="s2">&quot;Debes ingresar el gasto y el monto para editarlo&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="n">askyesno</span><span class="p">(</span><span class="s2">&quot;Editar&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Vas a editar gasto </span><span class="si">{</span><span class="n">gasto</span><span class="si">}</span><span class="s2">, monto </span><span class="si">{</span><span class="n">monto</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">):</span>
+            <span class="n">m_gasto</span> <span class="o">=</span> <span class="n">Gasto</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">gasto</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="n">monto</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Gasto</span><span class="o">.</span><span class="n">id</span><span class="o">==</span><span class="n">gasto_id</span><span class="p">)</span>
+            <span class="n">m_gasto</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+            <span class="n">tree_gastos</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">gasto_id</span><span class="p">),</span> <span class="n">values</span><span class="o">=</span><span class="p">(</span><span class="n">gasto</span><span class="p">,</span> <span class="n">monto</span><span class="p">,</span> <span class="n">date_str</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CREASTE GASTO </span><span class="si">{</span><span class="n">gasto</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">item_focus</span> <span class="o">=</span> <span class="n">tree_gastos</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+        <span class="n">gasto_id</span> <span class="o">=</span> <span class="n">tree_gastos</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">item_focus</span><span class="p">)[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
+
+        <span class="n">tree_gastos</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">item_focus</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EDITASTE GASTO </span><span class="si">{</span><span class="n">gasto_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GastoController.buscar_gastos">
+<a class="viewcode-back" href="../../controllers.html#controllers.c_gasto.GastoController.buscar_gastos">[documentos]</a>
+    <span class="k">def</span> <span class="nf">buscar_gastos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_filtro</span><span class="p">,</span> <span class="n">tree_gastos</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Busca gastos por nombre.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            var_filtro (StringVar): Variable de control para el campo de búsqueda.</span>
+<span class="sd">            tree_gastos (Treeview): Widget Treeview que muestra la lista de gastos.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">name_cat</span> <span class="o">=</span> <span class="n">var_filtro</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="n">gastos_result</span> <span class="o">=</span> <span class="n">Gasto</span><span class="o">.</span><span class="n">select</span><span class="p">()</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Gasto</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">name_cat</span><span class="p">))</span>
+
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tree_gastos</span><span class="o">.</span><span class="n">get_children</span><span class="p">():</span>
+                <span class="n">tree_gastos</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gastos_result</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">gasto</span> <span class="ow">in</span> <span class="n">gastos_result</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;*********** </span><span class="si">{</span><span class="n">gasto</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">tree_gastos</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">gasto</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">values</span><span class="o">=</span><span class="p">(</span><span class="n">gasto</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">gasto</span><span class="o">.</span><span class="n">amount</span><span class="p">,</span> <span class="n">gasto</span><span class="o">.</span><span class="n">get_formated_date</span><span class="p">()))</span>
+        <span class="k">except</span> <span class="n">DoesNotExist</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gastos Does not exist </span><span class="si">{</span><span class="n">ex</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+            <span class="c1"># raise ex(f&quot;No se encontraron Gastos para la categoría  con nombre {var_filtro.get()}&quot;)</span>
+
+<div class="viewcode-block" id="GastoController.buscar_gastos_por_cat">
+<a class="viewcode-back" href="../../controllers.html#controllers.c_gasto.GastoController.buscar_gastos_por_cat">[documentos]</a>
+    <span class="k">def</span> <span class="nf">buscar_gastos_por_cat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_filtro_cat</span><span class="p">,</span> <span class="n">tree_gastos</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Busca gastos por categoría.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            var_filtro_cat (StringVar): Variable de control para el campo de búsqueda por categoría.</span>
+<span class="sd">            tree_gastos (Treeview): Widget Treeview que muestra la lista de gastos.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">r_categoria</span> <span class="o">=</span> <span class="n">Categoria</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Categoria</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">var_filtro_cat</span><span class="o">.</span><span class="n">get</span><span class="p">()))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Nombre de categoría: </span><span class="si">{</span><span class="n">r_categoria</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">results_gastos</span> <span class="o">=</span> <span class="n">Gasto</span><span class="o">.</span><span class="n">select</span><span class="p">()</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Gasto</span><span class="o">.</span><span class="n">categoria</span><span class="o">==</span><span class="n">r_categoria</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">results_gastos</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">results_gastos</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tree_gastos</span><span class="o">.</span><span class="n">get_children</span><span class="p">():</span>
+                    <span class="n">tree_gastos</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">results_gastos</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                    <span class="n">tree_gastos</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">values</span><span class="o">=</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">amount</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">get_formated_date</span><span class="p">()))</span>
+                    <span class="c1"># tree_gastos.insert(&quot;&quot;, &quot;end&quot;, text=str(gasto_id), values=(gasto, monto, date, item_categoria_id))</span>
+        <span class="k">except</span> <span class="n">DoesNotExist</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gastos Does not exist: </span><span class="si">{</span><span class="n">ex</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">ex</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2023, Dario J. Grinberg.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

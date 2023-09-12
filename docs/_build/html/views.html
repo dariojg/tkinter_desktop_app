@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>views package &mdash; documentación de Expense Manager - 1.0.0</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=36c4ab74"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=efdbd0b9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="prev" title="utils module" href="utils.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Expense Manager
+          </a>
+              <div class="version">
+                1.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="main.html">Administrador de gastos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#referencia-rapida">Referencia rápida</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#categorias">Categorías</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#gastos">Gastos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#ejemplo">Ejemplo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controllers.html">controllers package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">models module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">utils module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">views package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-views.v_categoria">views.v_categoria module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#views.v_categoria.CategoriaView"><code class="docutils literal notranslate"><span class="pre">CategoriaView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#views.v_categoria.CategoriaView.controller_crear_categoria"><code class="docutils literal notranslate"><span class="pre">CategoriaView.controller_crear_categoria()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#views.v_categoria.CategoriaView.controller_editar_categoria"><code class="docutils literal notranslate"><span class="pre">CategoriaView.controller_editar_categoria()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#views.v_categoria.CategoriaView.controller_eliminar_categoria"><code class="docutils literal notranslate"><span class="pre">CategoriaView.controller_eliminar_categoria()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#views.v_categoria.CategoriaView.update_treeview"><code class="docutils literal notranslate"><span class="pre">CategoriaView.update_treeview()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#views.v_categoria.CategoriaView.view"><code class="docutils literal notranslate"><span class="pre">CategoriaView.view()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#views.v_categoria.categoria_view"><code class="docutils literal notranslate"><span class="pre">categoria_view()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-views.v_gasto">views.v_gasto module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#views.v_gasto.GastoView"><code class="docutils literal notranslate"><span class="pre">GastoView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#views.v_gasto.GastoView.controller_buscar_gastos"><code class="docutils literal notranslate"><span class="pre">GastoView.controller_buscar_gastos()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#views.v_gasto.GastoView.controller_buscar_gastos_por_cat"><code class="docutils literal notranslate"><span class="pre">GastoView.controller_buscar_gastos_por_cat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#views.v_gasto.GastoView.controller_crear_gasto"><code class="docutils literal notranslate"><span class="pre">GastoView.controller_crear_gasto()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#views.v_gasto.GastoView.controller_editar_gasto"><code class="docutils literal notranslate"><span class="pre">GastoView.controller_editar_gasto()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#views.v_gasto.GastoView.controller_eliminar_gasto"><code class="docutils literal notranslate"><span class="pre">GastoView.controller_eliminar_gasto()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#views.v_gasto.GastoView.get_tree"><code class="docutils literal notranslate"><span class="pre">GastoView.get_tree()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#views.v_gasto.GastoView.update_treeview"><code class="docutils literal notranslate"><span class="pre">GastoView.update_treeview()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#views.v_gasto.GastoView.view"><code class="docutils literal notranslate"><span class="pre">GastoView.view()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-views">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Expense Manager</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">views package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/views.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="views-package">
+<h1>views package<a class="headerlink" href="#views-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-views.v_categoria">
+<span id="views-v-categoria-module"></span><h2>views.v_categoria module<a class="headerlink" href="#module-views.v_categoria" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="views.v_categoria.CategoriaView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">views.v_categoria.</span></span><span class="sig-name descname"><span class="pre">CategoriaView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cat_controller</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/views/v_categoria.html#CategoriaView"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#views.v_categoria.CategoriaView" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="views.v_categoria.CategoriaView.controller_crear_categoria">
+<span class="sig-name descname"><span class="pre">controller_crear_categoria</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/views/v_categoria.html#CategoriaView.controller_crear_categoria"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#views.v_categoria.CategoriaView.controller_crear_categoria" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="views.v_categoria.CategoriaView.controller_editar_categoria">
+<span class="sig-name descname"><span class="pre">controller_editar_categoria</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/views/v_categoria.html#CategoriaView.controller_editar_categoria"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#views.v_categoria.CategoriaView.controller_editar_categoria" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="views.v_categoria.CategoriaView.controller_eliminar_categoria">
+<span class="sig-name descname"><span class="pre">controller_eliminar_categoria</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/views/v_categoria.html#CategoriaView.controller_eliminar_categoria"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#views.v_categoria.CategoriaView.controller_eliminar_categoria" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="views.v_categoria.CategoriaView.update_treeview">
+<span class="sig-name descname"><span class="pre">update_treeview</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/views/v_categoria.html#CategoriaView.update_treeview"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#views.v_categoria.CategoriaView.update_treeview" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="views.v_categoria.CategoriaView.view">
+<span class="sig-name descname"><span class="pre">view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/views/v_categoria.html#CategoriaView.view"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#views.v_categoria.CategoriaView.view" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="views.v_categoria.categoria_view">
+<span class="sig-prename descclassname"><span class="pre">views.v_categoria.</span></span><span class="sig-name descname"><span class="pre">categoria_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_categoria</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/views/v_categoria.html#categoria_view"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#views.v_categoria.categoria_view" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-views.v_gasto">
+<span id="views-v-gasto-module"></span><h2>views.v_gasto module<a class="headerlink" href="#module-views.v_gasto" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="views.v_gasto.GastoView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">views.v_gasto.</span></span><span class="sig-name descname"><span class="pre">GastoView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contr_gasto</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/views/v_gasto.html#GastoView"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#views.v_gasto.GastoView" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="views.v_gasto.GastoView.controller_buscar_gastos">
+<span class="sig-name descname"><span class="pre">controller_buscar_gastos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/views/v_gasto.html#GastoView.controller_buscar_gastos"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#views.v_gasto.GastoView.controller_buscar_gastos" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="views.v_gasto.GastoView.controller_buscar_gastos_por_cat">
+<span class="sig-name descname"><span class="pre">controller_buscar_gastos_por_cat</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/views/v_gasto.html#GastoView.controller_buscar_gastos_por_cat"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#views.v_gasto.GastoView.controller_buscar_gastos_por_cat" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="views.v_gasto.GastoView.controller_crear_gasto">
+<span class="sig-name descname"><span class="pre">controller_crear_gasto</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/views/v_gasto.html#GastoView.controller_crear_gasto"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#views.v_gasto.GastoView.controller_crear_gasto" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="views.v_gasto.GastoView.controller_editar_gasto">
+<span class="sig-name descname"><span class="pre">controller_editar_gasto</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/views/v_gasto.html#GastoView.controller_editar_gasto"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#views.v_gasto.GastoView.controller_editar_gasto" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="views.v_gasto.GastoView.controller_eliminar_gasto">
+<span class="sig-name descname"><span class="pre">controller_eliminar_gasto</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/views/v_gasto.html#GastoView.controller_eliminar_gasto"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#views.v_gasto.GastoView.controller_eliminar_gasto" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="views.v_gasto.GastoView.get_tree">
+<span class="sig-name descname"><span class="pre">get_tree</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/views/v_gasto.html#GastoView.get_tree"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#views.v_gasto.GastoView.get_tree" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="views.v_gasto.GastoView.update_treeview">
+<span class="sig-name descname"><span class="pre">update_treeview</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/views/v_gasto.html#GastoView.update_treeview"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#views.v_gasto.GastoView.update_treeview" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="views.v_gasto.GastoView.view">
+<span class="sig-name descname"><span class="pre">view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/views/v_gasto.html#GastoView.view"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#views.v_gasto.GastoView.view" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-views">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-views" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="utils.html" class="btn btn-neutral float-left" title="utils module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2023, Dario J. Grinberg.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
